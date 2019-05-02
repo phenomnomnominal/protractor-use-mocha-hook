@@ -49,6 +49,8 @@ This repo contains the *FIFTH* attempt, adding a setter which allows you to add 
 
 ## Usage
 
+It can be used when creating an inline Protractor plugin like this:
+
 ```javascript
 protractorConfig.plugins.push({
     inline: {
