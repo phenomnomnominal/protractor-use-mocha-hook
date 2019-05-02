@@ -10,7 +10,7 @@
 npm install @phenomnomnominal/protractor-use-mocha-hook --save-dev
 ```
 
-## Why?
+## Why
 
 This package is the culmination of a bunch of attempts to get Mocha hooks working well with Protractor, including when running tests in parallel.
 
@@ -46,3 +46,19 @@ This comment from [Tractor](https://github.com/TradeMe/tractor) describes some o
 ```
 
 This repo contains the *FIFTH* attempt, adding a setter which allows you to add a hook as soon as Mocha has added it to the global context. It is *definitely* still a hack 😅.
+
+## Usage
+
+```javascript
+protractorConfig.plugins.push({
+    inline: {
+        // use Protractor's setup to get in before Mocha's global `afterEach` hook is created
+        setup () {
+            // use `function` over `=>` to let Mocha set `this`:
+            useMochaHook('afterEach', async function () {
+                // do something
+            });
+        }
+    }
+});
+```
