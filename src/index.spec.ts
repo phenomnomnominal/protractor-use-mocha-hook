@@ -46,4 +46,32 @@ describe('useMochaHook', () => {
 
         global.afterEach = afterEach;
     });
+
+    it('should let you attach multiple handlers to the same hook', () => {
+        const setup = global.setup;
+        global.setup = null;
+
+        let called = 0;
+        // HACK:
+        // Use `function` so `this` is set by Mocha correctly:
+        // tslint:disable-next-line:only-arrow-functions
+        useMochaHook('setup', function () {
+            called += 1;
+        });
+        // tslint:disable-next-line:only-arrow-functions
+        useMochaHook('setup', function () {
+            called += 1;
+        });
+
+        // HACK:
+        // Use `function` so `this` is set by Mocha correctly:
+        // tslint:disable-next-line:only-arrow-functions
+        global.setup = function (func: AsyncFunc): void {
+            func.call(this);
+        } as HookFunction;
+
+        equal(called, 2);
+
+        global.setup = setup;
+    });
 });
