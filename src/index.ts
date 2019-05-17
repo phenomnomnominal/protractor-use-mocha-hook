@@ -15,7 +15,8 @@ const HANDLERS: Record<keyof MochaGlobals, Array<AsyncFunc | Func>> = {
 export function useMochaHook (hookName: keyof MochaGlobals, handler: AsyncFunc | Func) {
     HANDLERS[hookName].push(handler);
 
-    if (!Object.getOwnPropertyDescriptor(global, hookName).get) {
+    const descriptor = Object.getOwnPropertyDescriptor(global, hookName);
+    if (!descriptor || !descriptor.get) {
         let setHook: HookFunction;
         Object.defineProperty(global, hookName, {
             get (): HookFunction {
