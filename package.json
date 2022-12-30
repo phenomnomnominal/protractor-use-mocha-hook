@@ -25,14 +25,14 @@
   "devDependencies": {
     "@types/mocha": "^5.2.6",
     "@types/node": "^11.13.5",
-    "mocha": "^6.1.4",
+    "mocha": "^10.2.0",
     "nyc": "^14.0.0",
     "ts-node": "^8.1.0",
     "tslint": "^5.16.0",
     "typescript": "^3"
   },
   "peerDependencies": {
-    "mocha": "^6.1.4"
+    "mocha": "^10.2.0"
   },
   "nyc": {
     "include": [
